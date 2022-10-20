@@ -2,10 +2,12 @@ package com.amaris.common.jwt;
 
 import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.Account;
+import com.amaris.domain.AccountRoleMap;
 import com.amaris.exception.impl.NotFoundException;
 import com.amaris.repository.AccountRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -62,10 +64,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         } else {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-//            for (UserRole userRole : account.getRoles())
-//            {
-//                grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getName()));
-//            }
+            for (AccountRoleMap accountRoleMap : account.getAccountRoleMaps())
+            {
+                grantedAuthorities.add(new SimpleGrantedAuthority(accountRoleMap.getRole().getName()));
+            }
 
             return new User(account.getEmail(), account.getPassword(), grantedAuthorities);
         }

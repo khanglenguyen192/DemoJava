@@ -74,6 +74,10 @@ public class SecurityConfig {
                         "/api/auth/**",
                         "/api/account/createAccount")
                 .permitAll()
+                .antMatchers("/api/catalog/**")
+                .hasRole("ADMIN")
+                .antMatchers("/api/item/**")
+                .hasAnyRole("ADMIN", "USER")
                 .anyRequest()
                 .authenticated()
                 .and()
