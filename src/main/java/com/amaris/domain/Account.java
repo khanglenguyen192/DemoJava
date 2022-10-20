@@ -12,7 +12,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "accounts")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Account extends BaseEntity {
     @Id
@@ -34,12 +36,16 @@ public class Account extends BaseEntity {
     @Column(nullable = true)
     private String accountNumber;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "account_role_map", joinColumns = { @JoinColumn(name = "account_id")}, inverseJoinColumns = { @JoinColumn(name = "role_id")})
-    private Set<UserRole> roles = new HashSet<UserRole>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AccountRoleMap> accountRoleMaps;
 
-    public void setRoles(List<UserRole> roles)
-    {
-        roles.addAll(roles);
-    }
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "account_role_map", joinColumns = { @JoinColumn(name = "account_id")}, inverseJoinColumns = { @JoinColumn(name = "role_id")})
+//    private Set<UserRole> roles = new HashSet<UserRole>();
+//
+//    public void setRoles(List<UserRole> roles)
+//    {
+//        roles.addAll(roles);
+//    }
 }

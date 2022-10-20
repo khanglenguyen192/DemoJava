@@ -3,16 +3,19 @@ package com.amaris.service.impls;
 import com.amaris.common.utils.GlobalConstants;
 import com.amaris.config.SecurityConfig;
 import com.amaris.domain.Account;
+import com.amaris.domain.AccountRoleMap;
 import com.amaris.domain.UserRole;
 import com.amaris.dto.account.CreateAccountDto;
 import com.amaris.dto.account.UpdateAccountDto;
 import com.amaris.exception.impl.NotAllowException;
 import com.amaris.exception.impl.NotFoundException;
 import com.amaris.repository.AccountRepository;
+import com.amaris.repository.AccountRoleMapRepository;
 import com.amaris.repository.UserRoleRepository;
 import com.amaris.service.AccountService;
 import com.amaris.service.mapper.AccountMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,15 +25,19 @@ public class AccountServiceImpl implements AccountService {
     private final SecurityConfig securityConfig;
     private final AccountRepository accountRepository;
     private final UserRoleRepository userRoleRepository;
+
+    private final AccountRoleMapRepository accountRoleMapRepository;
     private final AccountMapper accountMapper;
 
-    public AccountServiceImpl(SecurityConfig securityConfig, AccountRepository accountRepository, UserRoleRepository userRoleRepository, AccountMapper accountMapper) {
+    public AccountServiceImpl(SecurityConfig securityConfig, AccountRepository accountRepository, UserRoleRepository userRoleRepository, AccountRoleMapRepository accountRoleMapRepository, AccountMapper accountMapper) {
         this.securityConfig = securityConfig;
         this.accountRepository = accountRepository;
         this.userRoleRepository = userRoleRepository;
+        this.accountRoleMapRepository = accountRoleMapRepository;
         this.accountMapper = accountMapper;
     }
 
+    @Transactional
     @Override
     public boolean createNewAccount(CreateAccountDto request) {
 
@@ -45,9 +52,18 @@ public class AccountServiceImpl implements AccountService {
         if (account != null) throw new NotAllowException(GlobalConstants.EMIAL_EXISTS);
 
         List<UserRole> roles = userRoleRepository.findAllById(request.getRoleIds());
-        newAccount.setRoles(roles);
 
-        return accountRepository.save(newAccount) != null;
+        accountRepository.save(newAccount);
+
+        for (UserRole role: roles){
+            AccountRoleMap accountRoleMap = new AccountRoleMap();
+            accountRoleMap.setAccount(newAccount);
+            accountRoleMap.setRole(role);
+
+            accountRoleMapRepository.save(accountRoleMap);
+        }
+
+        return true;
     }
 
     @Override

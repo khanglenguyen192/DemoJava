@@ -1,28 +1,30 @@
 package com.amaris.domain;
 
 import com.amaris.domain.base.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "userroles")
 public class UserRole extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer accountId;
+    private Integer id;
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
-    private Set<Account> accounts = new HashSet<Account>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AccountRoleMap> accountRoleMaps;
+
+//    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+//    private Set<Account> accounts = new HashSet<Account>();
 }

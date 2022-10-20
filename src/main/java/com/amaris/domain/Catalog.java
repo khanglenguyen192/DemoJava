@@ -1,10 +1,7 @@
 package com.amaris.domain;
 
 import com.amaris.domain.base.BaseEntity;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -12,7 +9,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "catalogs")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Catalog extends BaseEntity {
     @Id
