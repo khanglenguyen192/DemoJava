@@ -22,9 +22,10 @@ public class ItemController {
     }
 
     @GetMapping("getAllItem")
-    public ResponseEntity<List<ItemDto>> getAll(@PathVariable int pageNo, int pageSize)
+    public ResponseEntity<List<ItemDto>> getAll(@RequestParam(required = false, defaultValue = "0") int pageNo,
+                                                @RequestParam(required = false, defaultValue = "3") int pageSize)
     {
-        Pageable page = PageRequest.of(pageNo, pageSize);
+        PageRequest page = PageRequest.of(pageNo, pageSize);
         return new ResponseEntity<>(itemService.getAllItem(page), HttpStatus.OK);
     }
 

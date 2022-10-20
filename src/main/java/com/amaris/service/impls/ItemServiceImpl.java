@@ -54,9 +54,7 @@ public class ItemServiceImpl implements ItemService {
         Item newItem = itemMapper.toItem(itemDto);
         newItem.setCreatedDate(LocalDateTime.now());
         newItem.setCatalog(catalog);
-        itemRepository.save(newItem);
-
-        return false;
+        return itemRepository.save(newItem) != null;
     }
 
     @Override
