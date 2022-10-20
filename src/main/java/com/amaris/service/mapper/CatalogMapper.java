@@ -9,11 +9,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CatalogMapper {
-    public Catalog toCataLog(CatalogDto catalogDto);
+    Catalog toCataLog(CatalogDto catalogDto);
 
-    public Catalog toCatalog(@MappingTarget Catalog catalog, CatalogDto catalogDto);
+    Catalog toCatalog(@MappingTarget Catalog catalog, CatalogDto catalogDto);
 
-    public CatalogDto toCatalogDto(Catalog catalog);
+    CatalogDto toCatalogDto(Catalog catalog);
 
-    public List<CatalogDto> toCatalogDtos(List<Catalog> catalogs);
+    List<CatalogDto> toCatalogDtos(List<Catalog> catalogs);
 }
