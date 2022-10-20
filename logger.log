@@ -1,0 +1,88 @@
+2022-10-20 13:28:37.559  INFO 5604 --- [restartedMain] com.amaris.TrainingApplication           : Starting TrainingApplication using Java 11.0.16 on CL-PF0C993B with PID 5604 (C:\Users\nguyenkhang.le_amari\Desktop\workspace\Java\SampleProject\Training\target\classes started by nguyenkhang.le_amari in C:\Users\nguyenkhang.le_amari\Desktop\workspace\Java\SampleProject\Training)
+2022-10-20 13:28:37.565  INFO 5604 --- [restartedMain] com.amaris.TrainingApplication           : The following 1 profile is active: "default"
+2022-10-20 13:28:38.021  INFO 5604 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-10-20 13:28:38.022  INFO 5604 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-10-20 13:28:42.598  INFO 5604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-10-20 13:28:42.881  INFO 5604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 259 ms. Found 4 JPA repository interfaces.
+2022-10-20 13:28:48.493  INFO 5604 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-10-20 13:28:48.621  INFO 5604 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-10-20 13:28:48.624  INFO 5604 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-10-20 13:28:49.352  INFO 5604 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-10-20 13:28:49.354  INFO 5604 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 11294 ms
+2022-10-20 13:28:50.664  INFO 5604 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-10-20 13:28:50.861  INFO 5604 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.11.Final
+2022-10-20 13:28:51.335  INFO 5604 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-10-20 13:28:51.667  INFO 5604 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-10-20 13:28:52.161  INFO 5604 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-10-20 13:28:52.218  INFO 5604 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2022-10-20 13:28:54.976  INFO 5604 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-10-20 13:28:55.006  INFO 5604 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-10-20 13:28:57.174  INFO 5604 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3a47aa11, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@58bff5c0, org.springframework.security.web.context.SecurityContextPersistenceFilter@2ca9ff74, org.springframework.security.web.header.HeaderWriterFilter@5995a8f5, org.springframework.security.web.authentication.logout.LogoutFilter@45a7bdae, com.amaris.common.jwt.JwtRequestFilter@76e53e67, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4abb32c6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@290a36ba, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6369c740, org.springframework.security.web.session.SessionManagementFilter@7ad75faf, org.springframework.security.web.access.ExceptionTranslationFilter@6fd7e17b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2a77be7b]
+2022-10-20 13:28:57.652  WARN 5604 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-10-20 13:29:05.136  INFO 5604 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-10-20 13:29:05.277  INFO 5604 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-10-20 13:29:05.309  INFO 5604 --- [restartedMain] com.amaris.TrainingApplication           : Started TrainingApplication in 30.069 seconds (JVM running for 32.395)
+2022-10-20 13:29:12.392  INFO 5604 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-10-20 13:29:12.394  INFO 5604 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-10-20 13:29:12.407  INFO 5604 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2022-10-20 13:29:13.434  INFO 5604 --- [http-nio-8080-exec-1] com.amaris.web.rest.AuthController       : login
+2022-10-20 13:35:21.566  INFO 5604 --- [http-nio-8080-exec-4] com.amaris.web.rest.AuthController       : login
+2022-10-20 13:39:55.379  INFO 17904 --- [restartedMain] com.amaris.TrainingApplication           : Starting TrainingApplication using Java 11.0.16 on CL-PF0C993B with PID 17904 (C:\Users\nguyenkhang.le_amari\Desktop\workspace\Java\SampleProject\Training\target\classes started by nguyenkhang.le_amari in C:\Users\nguyenkhang.le_amari\Desktop\workspace\Java\SampleProject\Training)
+2022-10-20 13:39:55.384  INFO 17904 --- [restartedMain] com.amaris.TrainingApplication           : The following 1 profile is active: "default"
+2022-10-20 13:39:55.736  INFO 17904 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-10-20 13:39:55.750  INFO 17904 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-10-20 13:40:01.206  INFO 17904 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-10-20 13:40:01.440  INFO 17904 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 212 ms. Found 4 JPA repository interfaces.
+2022-10-20 13:40:04.457  INFO 17904 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-10-20 13:40:04.498  INFO 17904 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-10-20 13:40:04.499  INFO 17904 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-10-20 13:40:05.029  INFO 17904 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-10-20 13:40:05.030  INFO 17904 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9262 ms
+2022-10-20 13:40:05.720  INFO 17904 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-10-20 13:40:05.886  INFO 17904 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.11.Final
+2022-10-20 13:40:06.437  INFO 17904 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-10-20 13:40:07.036  INFO 17904 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-10-20 13:40:07.624  INFO 17904 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-10-20 13:40:07.678  INFO 17904 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2022-10-20 13:40:09.912  INFO 17904 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-10-20 13:40:09.933  INFO 17904 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-10-20 13:40:12.752  INFO 17904 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6ca76f8b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4eed6d28, org.springframework.security.web.context.SecurityContextPersistenceFilter@59277b5e, org.springframework.security.web.header.HeaderWriterFilter@10bdc6ff, org.springframework.security.web.authentication.logout.LogoutFilter@5ce77ff4, com.amaris.common.jwt.JwtRequestFilter@6b18e61d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f7bc499, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7de4b1a3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@582de477, org.springframework.security.web.session.SessionManagementFilter@5d98be31, org.springframework.security.web.access.ExceptionTranslationFilter@75cd5933, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@78f17eb2]
+2022-10-20 13:40:13.400  WARN 17904 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-10-20 13:40:19.992  INFO 17904 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-10-20 13:40:20.146  INFO 17904 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-10-20 13:40:20.188  INFO 17904 --- [restartedMain] com.amaris.TrainingApplication           : Started TrainingApplication in 27.08 seconds (JVM running for 31.735)
+2022-10-20 13:40:49.246  INFO 17904 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-10-20 13:40:49.249  INFO 17904 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-10-20 13:40:49.268  INFO 17904 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2022-10-20 13:40:50.536  INFO 17904 --- [http-nio-8080-exec-2] com.amaris.web.rest.AuthController       : /api/auth/login
+2022-10-20 13:44:38.590  INFO 17904 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-10-20 13:44:38.677  INFO 17904 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-10-20 13:44:38.733  INFO 17904 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-10-20 13:45:11.823  INFO 11760 --- [restartedMain] com.amaris.TrainingApplication           : Starting TrainingApplication using Java 11.0.16 on CL-PF0C993B with PID 11760 (C:\Users\nguyenkhang.le_amari\Desktop\workspace\Java\SampleProject\Training\target\classes started by nguyenkhang.le_amari in C:\Users\nguyenkhang.le_amari\Desktop\workspace\Java\SampleProject\Training)
+2022-10-20 13:45:11.826  INFO 11760 --- [restartedMain] com.amaris.TrainingApplication           : The following 1 profile is active: "default"
+2022-10-20 13:45:12.003  INFO 11760 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-10-20 13:45:12.004  INFO 11760 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-10-20 13:45:15.169  INFO 11760 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-10-20 13:45:15.656  INFO 11760 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 451 ms. Found 4 JPA repository interfaces.
+2022-10-20 13:45:19.366  INFO 11760 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-10-20 13:45:19.398  INFO 11760 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-10-20 13:45:19.399  INFO 11760 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-10-20 13:45:19.688  INFO 11760 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-10-20 13:45:19.689  INFO 11760 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7683 ms
+2022-10-20 13:45:20.422  INFO 11760 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-10-20 13:45:20.576  INFO 11760 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.11.Final
+2022-10-20 13:45:21.156  INFO 11760 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-10-20 13:45:21.928  INFO 11760 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-10-20 13:45:22.532  INFO 11760 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-10-20 13:45:22.604  INFO 11760 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2022-10-20 13:45:25.021  INFO 11760 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-10-20 13:45:25.044  INFO 11760 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-10-20 13:45:30.573  INFO 11760 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1ffd932f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6379f8af, org.springframework.security.web.context.SecurityContextPersistenceFilter@796bc5ad, org.springframework.security.web.header.HeaderWriterFilter@6cabf255, org.springframework.security.web.authentication.logout.LogoutFilter@7d7539a8, com.amaris.common.jwt.JwtRequestFilter@821d41e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f6d4ec6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@588caa2b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@762309e5, org.springframework.security.web.session.SessionManagementFilter@70190dfb, org.springframework.security.web.access.ExceptionTranslationFilter@567608d7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4bed2c06]
+2022-10-20 13:45:32.784  WARN 11760 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-10-20 13:45:44.345  INFO 11760 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-10-20 13:45:44.594  INFO 11760 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-10-20 13:45:44.669  INFO 11760 --- [restartedMain] com.amaris.TrainingApplication           : Started TrainingApplication in 34.756 seconds (JVM running for 36.418)
+2022-10-20 13:45:45.214  INFO 11760 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-10-20 13:45:45.215  INFO 11760 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-10-20 13:45:45.219  INFO 11760 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2022-10-20 13:45:46.088  INFO 11760 --- [http-nio-8080-exec-2] com.amaris.web.rest.AuthController       : /api/auth/login
