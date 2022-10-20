@@ -38,8 +38,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         } else {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-            for (AccountRoleMap accountRoleMap : account.getAccountRoleMaps())
-            {
+            for (AccountRoleMap accountRoleMap : account.getAccountRoleMaps()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(accountRoleMap.getRole().getName()));
             }
 
