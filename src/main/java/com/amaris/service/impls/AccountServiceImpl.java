@@ -75,7 +75,7 @@ public class AccountServiceImpl implements AccountService {
         account.setModifyDate(LocalDateTime.now());
         accountMapper.toAccount(account, updateAccountDto);
 
-        return accountRepository.save(account) != null;
+        return accountRepository.update(account) != null;
     }
 
     @Override

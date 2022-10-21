@@ -57,9 +57,8 @@ public class ItemServiceImpl implements ItemService {
         );
 
         Item newItem = itemMapper.toItem(itemDto);
-        newItem.setCreatedDate(LocalDateTime.now());
         newItem.setCatalog(catalog);
-        return itemRepository.save(newItem) != null;
+        return itemRepository.insert(newItem) != null;
     }
 
     @Override
@@ -67,7 +66,6 @@ public class ItemServiceImpl implements ItemService {
         var item = itemRepository.findById(itemDto.getItemId()).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, GlobalConstants.ITEM_ID_NOT_FOUND)
         );
-
         itemMapper.toItem(item, itemDto);
 
         //Catalog change
@@ -76,12 +74,8 @@ public class ItemServiceImpl implements ItemService {
             Catalog catalog = catalogRepository.findById(itemDto.getCatalogId()).orElseThrow(
                     () -> new NotFoundException(GlobalConstants.CATALOG_ID_NOT_FOUND)
             );
-
             item.setCatalog(catalog);
         }
-
-        item.setModifyDate(LocalDateTime.now());
-
-        return itemRepository.save(item) != null;
+        return itemRepository.update(item) != null;
     }
 }
