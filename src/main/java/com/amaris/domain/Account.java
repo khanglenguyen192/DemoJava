@@ -35,17 +35,4 @@ public class Account extends BaseEntity {
     @Nullable
     @Column(nullable = true)
     private String accountNumber;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<AccountRoleMap> accountRoleMaps;
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "account_role_map", joinColumns = { @JoinColumn(name = "account_id")}, inverseJoinColumns = { @JoinColumn(name = "role_id")})
-//    private Set<UserRole> roles = new HashSet<UserRole>();
-//
-//    public void setRoles(List<UserRole> roles)
-//    {
-//        roles.addAll(roles);
-//    }
 }

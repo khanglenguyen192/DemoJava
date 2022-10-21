@@ -87,4 +87,9 @@ public class AccountServiceImpl implements AccountService {
 
         return false;
     }
+
+    @Override
+    public List<AccountRoleMap> getAccountRoles(Integer accountId) {
+        return accountRoleMapRepository.findAllByAccountId(accountId);
+    }
 }

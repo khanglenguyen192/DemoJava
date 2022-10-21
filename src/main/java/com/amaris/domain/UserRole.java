@@ -20,11 +20,4 @@ public class UserRole extends BaseEntity {
     private Integer id;
 
     private String name;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<AccountRoleMap> accountRoleMaps;
-
-//    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
-//    private Set<Account> accounts = new HashSet<Account>();
 }

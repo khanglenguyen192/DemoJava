@@ -5,6 +5,7 @@ import com.amaris.domain.Account;
 import com.amaris.domain.AccountRoleMap;
 import com.amaris.exception.impl.NotFoundException;
 import com.amaris.repository.AccountRepository;
+import com.amaris.repository.AccountRoleMapRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,10 +22,13 @@ import java.util.Set;
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
     private final AccountRepository accountRepository;
 
+    private final AccountRoleMapRepository accountRoleMapRepository;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public CustomUserDetailsServiceImpl(AccountRepository accountRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public CustomUserDetailsServiceImpl(AccountRepository accountRepository, AccountRoleMapRepository accountRoleMapRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.accountRepository = accountRepository;
+        this.accountRoleMapRepository = accountRoleMapRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -38,7 +41,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         } else {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-            for (AccountRoleMap accountRoleMap : account.getAccountRoleMaps()) {
+            for (AccountRoleMap accountRoleMap : accountRoleMapRepository.findAllByAccountId(account.getAccountId())) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(accountRoleMap.getRole().getName()));
             }
 

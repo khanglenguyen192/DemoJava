@@ -5,6 +5,7 @@ import com.amaris.domain.Account;
 import com.amaris.domain.AccountRoleMap;
 import com.amaris.exception.impl.NotFoundException;
 import com.amaris.repository.AccountRepository;
+import com.amaris.repository.AccountRoleMapRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,9 +30,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtTokenUtils jwtTokenUtil;
     private final AccountRepository accountRepository;
 
-    public JwtRequestFilter(JwtTokenUtils jwtTokenUtil, AccountRepository accountRepository) {
+    private final AccountRoleMapRepository accountRoleMapRepository;
+
+    public JwtRequestFilter(JwtTokenUtils jwtTokenUtil, AccountRepository accountRepository, AccountRoleMapRepository accountRoleMapRepository) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.accountRepository = accountRepository;
+        this.accountRoleMapRepository = accountRoleMapRepository;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         } else {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-            for (AccountRoleMap accountRoleMap : account.getAccountRoleMaps())
+            for (AccountRoleMap accountRoleMap : accountRoleMapRepository.findAllByAccountId(account.getAccountId()))
             {
                 grantedAuthorities.add(new SimpleGrantedAuthority(accountRoleMap.getRole().getName()));
             }

@@ -74,6 +74,8 @@ public class SecurityConfig {
                         "/api/auth/**",
                         "/api/account/createAccount")
                 .permitAll()
+                .antMatchers("/api/**")
+                .authenticated()
                 .antMatchers("/api/catalog/**")
                 .hasRole("ADMIN")
                 .antMatchers("/api/item/**")
@@ -85,9 +87,6 @@ public class SecurityConfig {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SESSION_CREATION_POLICY);
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint((request, response, authException) -> {response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());});
 
         http.httpBasic().disable();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
