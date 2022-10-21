@@ -1,11 +1,9 @@
 package com.amaris.dto.repository;
 
 import com.amaris.domain.Item;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.amaris.dto.repository.base.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Integer> {
+public interface ItemRepository extends BaseRepository<Item, Integer> {
 }

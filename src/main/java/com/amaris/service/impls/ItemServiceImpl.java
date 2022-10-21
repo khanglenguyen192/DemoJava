@@ -38,7 +38,7 @@ public class ItemServiceImpl implements ItemService {
 
         Page<Item> items = itemRepository.findAll(page);
 
-        return new PageResponse<ItemDto>(itemMapper.toItemDtos(items.toList()), page, items.getTotalPages());
+        return new PageResponse<>(itemMapper.toItemDtos(items.toList()), page, items.getTotalPages());
     }
 
     @Override

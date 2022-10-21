@@ -31,10 +31,7 @@ public class CatalogServiceImpl implements CatalogService {
         );
 
         Catalog newCatalog = catalogMapper.toCataLog(catalogDto);
-
-        newCatalog.setCreatedDate(LocalDateTime.now());
-
-        return catalogRepository.save(newCatalog) != null;
+        return catalogRepository.insert(newCatalog) != null;
     }
 
     @Override
@@ -44,8 +41,7 @@ public class CatalogServiceImpl implements CatalogService {
         );
 
         catalogMapper.toCatalog(catalog, catalogDto);
-        catalog.setModifyDate(LocalDateTime.now());
-        return catalogRepository.save(catalog) != null;
+        return catalogRepository.update(catalog) != null;
     }
 
     @Override

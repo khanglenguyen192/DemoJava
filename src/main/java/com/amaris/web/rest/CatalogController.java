@@ -40,7 +40,7 @@ public class CatalogController {
     @PutMapping("updateCatalog")
     public ResponseEntity<String> updateCatalog(@RequestBody @Valid CatalogDto request)
     {
-        if (catalogService.createCatalog(request))
+        if (catalogService.updateCatalog(request))
             return new ResponseEntity<>(GlobalConstants.SUCCESS, HttpStatus.OK);
 
         return new ResponseEntity<>(GlobalConstants.FAILED, HttpStatus.BAD_REQUEST);

@@ -2,13 +2,13 @@ package com.amaris.dto.repository;
 
 import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.UserRole;
+import com.amaris.dto.repository.base.BaseRepository;
 import com.amaris.exception.impl.NotFoundException;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface UserRoleRepository extends JpaRepository<UserRole, Integer> {
+public interface UserRoleRepository extends BaseRepository<UserRole, Integer> {
     default List<UserRole> findAllById(Iterable<Integer> ids)
     {
         List<UserRole> results = new ArrayList<UserRole>();
