@@ -1,6 +1,7 @@
 package com.amaris.web.rest;
 
 import com.amaris.common.utils.GlobalConstants;
+import com.amaris.dto.base.PageResponse;
 import com.amaris.dto.item.ItemDto;
 import com.amaris.service.impls.ItemServiceImpl;
 import org.springframework.data.domain.PageRequest;
@@ -22,8 +23,8 @@ public class ItemController {
     }
 
     @GetMapping("getAllItem")
-    public ResponseEntity<List<ItemDto>> getAll(@RequestParam(required = false, defaultValue = "0") int pageNo,
-                                                @RequestParam(required = false, defaultValue = "3") int pageSize)
+    public ResponseEntity<PageResponse<ItemDto>> getAll(@RequestParam(required = false, defaultValue = "0") int pageNo,
+                                                        @RequestParam(required = false, defaultValue = "3") int pageSize)
     {
         PageRequest page = PageRequest.of(pageNo, pageSize);
         return new ResponseEntity<>(itemService.getAllItem(page), HttpStatus.OK);

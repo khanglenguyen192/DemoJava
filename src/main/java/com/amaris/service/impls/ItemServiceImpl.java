@@ -3,6 +3,7 @@ package com.amaris.service.impls;
 import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.Catalog;
 import com.amaris.domain.Item;
+import com.amaris.dto.base.PageResponse;
 import com.amaris.dto.item.ItemDto;
 import com.amaris.exception.impl.NotAllowException;
 import com.amaris.exception.impl.NotFoundException;
@@ -10,6 +11,7 @@ import com.amaris.dto.repository.CatalogRepository;
 import com.amaris.dto.repository.ItemRepository;
 import com.amaris.service.ItemService;
 import com.amaris.service.mapper.ItemMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -32,8 +34,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> getAllItem(Pageable page) {
-        return itemMapper.toItemDtos(itemRepository.findAll(page).toList());
+    public PageResponse<ItemDto> getAllItem(Pageable page) {
+
+        Page<Item> items = itemRepository.findAll(page);
+
+        return new PageResponse<ItemDto>(itemMapper.toItemDtos(items.toList()), page, items.getTotalPages());
     }
 
     @Override

@@ -40,12 +40,10 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody @Valid LoginDto request) {
         try {
             log.info("/api/auth/login");
-
             if (accountService.verifyAccount(request.getEmail(), request.getPassword())) {
-                Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-
-                UserDetails account = (UserDetails) authentication.getPrincipal();
-                String accessToken = jwtTokenUtil.generateToken(account.getUsername());
+//                Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));W
+//                UserDetails account = (UserDetails) authentication.getPrincipal();
+                String accessToken = jwtTokenUtil.generateToken(request.getEmail());
 
                 return ResponseEntity.ok(accessToken);
             }
