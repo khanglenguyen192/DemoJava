@@ -4,7 +4,7 @@ import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.Catalog;
 import com.amaris.dto.catalog.CatalogDto;
 import com.amaris.exception.impl.NotAllowException;
-import com.amaris.repository.CatalogRepository;
+import com.amaris.dto.repository.CatalogRepository;
 import com.amaris.service.CatalogService;
 import com.amaris.service.mapper.CatalogMapper;
 import org.springframework.http.HttpStatus;

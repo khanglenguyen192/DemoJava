@@ -13,8 +13,8 @@ import java.util.function.Function;
 
 @Component
 public class JwtTokenUtils implements Serializable {
-    private static final String JWT_SECRET_KEY = "t#8MR6r$@Q3x";
-    private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
+    private final String JWT_SECRET_KEY = "t#8MR6r$@Q3x";
+    private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
     private final long JWT_EXPIRATION = 604800000L;
 
     public String generateToken(String username) {
@@ -23,13 +23,7 @@ public class JwtTokenUtils implements Serializable {
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {
-
-        return Jwts.builder().setClaims(claims)
-                             .setSubject(subject)
-                             .setIssuedAt(new Date(System.currentTimeMillis()))
-                             .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
-                             .signWith(SIGNATURE_ALGORITHM, JWT_SECRET_KEY)
-                             .compact();
+        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION)).signWith(SIGNATURE_ALGORITHM, JWT_SECRET_KEY).compact();
     }
 
     public String getEmailFromToken(String token) {
@@ -56,8 +50,7 @@ public class JwtTokenUtils implements Serializable {
 
     public boolean validateAccessToken(String token) {
         try {
-            if (!isTokenExpired(token))
-            {
+            if (!isTokenExpired(token)) {
                 Jwts.parser().setSigningKey(JWT_SECRET_KEY).parseClaimsJws(token);
                 return true;
             }

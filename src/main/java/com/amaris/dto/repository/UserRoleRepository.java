@@ -1,4 +1,4 @@
-package com.amaris.repository;
+package com.amaris.dto.repository;
 
 import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.UserRole;

@@ -1,4 +1,4 @@
-package com.amaris.repository;
+package com.amaris.dto.repository;
 
 import com.amaris.domain.Account;
 import org.springframework.data.jpa.repository.JpaRepository;

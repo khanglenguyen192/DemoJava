@@ -1,4 +1,4 @@
-package com.amaris.repository;
+package com.amaris.dto.repository;
 
 import com.amaris.domain.Item;
 import org.springframework.data.domain.Page;

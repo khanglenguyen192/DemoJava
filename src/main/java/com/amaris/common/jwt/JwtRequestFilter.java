@@ -4,8 +4,8 @@ import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.Account;
 import com.amaris.domain.AccountRoleMap;
 import com.amaris.exception.impl.NotFoundException;
-import com.amaris.repository.AccountRepository;
-import com.amaris.repository.AccountRoleMapRepository;
+import com.amaris.dto.repository.AccountRepository;
+import com.amaris.dto.repository.AccountRoleMapRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,7 +29,6 @@ import java.util.Set;
 public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtTokenUtils jwtTokenUtil;
     private final AccountRepository accountRepository;
-
     private final AccountRoleMapRepository accountRoleMapRepository;
 
     public JwtRequestFilter(JwtTokenUtils jwtTokenUtil, AccountRepository accountRepository, AccountRoleMapRepository accountRoleMapRepository) {
@@ -46,7 +45,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 setAuthenticationContext(accessToken, request);
             }
         }
-
         filterChain.doFilter(request, response);
     }
 
@@ -58,9 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     private UserDetails getUserDetailsFromAccessToken(String accessToken) {
-
         String email = jwtTokenUtil.getEmailFromToken(accessToken);
-
         Account account = accountRepository.findByEmail(email);
 
         if (account == null) {
@@ -68,8 +64,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         } else {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-            for (AccountRoleMap accountRoleMap : accountRoleMapRepository.findAllByAccountId(account.getAccountId()))
-            {
+            for (AccountRoleMap accountRoleMap : accountRoleMapRepository.findAllByAccountId(account.getAccountId())) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(accountRoleMap.getRole().getName()));
             }
 
@@ -85,11 +80,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private String getAccessToken(HttpServletRequest request) {
         String header = request.getHeader(GlobalConstants.AUTHORIZATION);
 
-        if (header.startsWith(GlobalConstants.BEARER)){
+        if (header.startsWith(GlobalConstants.BEARER)) {
             String token = header.split(" ")[1].trim();
             return token;
         }
-
         return null;
     }
 }

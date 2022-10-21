@@ -1,11 +1,17 @@
 package com.amaris.domain;
 
 import com.amaris.domain.base.BaseEntity;
-import lombok.*;
-import net.minidev.json.annotate.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
 
 @Entity
 @Getter
