@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,5 +47,16 @@ public class ItemController {
             return new ResponseEntity<>(GlobalConstants.SUCCESS, HttpStatus.OK);;
 
         return new ResponseEntity<>(GlobalConstants.FAILED, HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("findItem")
+    public ResponseEntity<PageResponse<ItemDto>> findItem(@RequestParam(required = false) @Nullable Integer itemId,
+                                                          @RequestParam(required = false) @Nullable String itemName,
+                                                          @RequestParam(required = false) @Nullable Integer catalogId,
+                                                          @RequestParam(required = false, defaultValue = "0") int pageNo,
+                                                          @RequestParam(required = false, defaultValue = "100") int pageSize)
+    {
+        PageRequest page = PageRequest.of(pageNo, pageSize);
+        return new ResponseEntity<>(itemService.findItem(itemId, itemName, catalogId, page), HttpStatus.OK);
     }
 }
