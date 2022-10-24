@@ -3,6 +3,7 @@ package com.amaris.common.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -13,7 +14,8 @@ import java.util.function.Function;
 
 @Component
 public class JwtTokenUtils implements Serializable {
-    private final String JWT_SECRET_KEY = "t#8MR6r$@Q3x";
+    @Value("${app.jwt.secret_key}")
+    private String JWT_SECRET_KEY;
     private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
     private final long JWT_EXPIRATION = 604800000L;
 

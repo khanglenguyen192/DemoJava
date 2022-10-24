@@ -35,3 +35,7 @@ logging:
     path: logs
     max-size: 10KB
     max-history: 7
+
+app:
+  jwt:
+    secret_key: t#8MR6r$@Q3x
