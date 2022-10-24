@@ -39,3 +39,4 @@ logging:
 app:
   jwt:
     secret_key: t#8MR6r$@Q3x
+    expiration: 604800000

@@ -17,7 +17,8 @@ public class JwtTokenUtils implements Serializable {
     @Value("${app.jwt.secret_key}")
     private String JWT_SECRET_KEY;
     private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
-    private final long JWT_EXPIRATION = 604800000L;
+    @Value("${app.jwt.expiration}")
+    private long JWT_EXPIRATION;
 
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
