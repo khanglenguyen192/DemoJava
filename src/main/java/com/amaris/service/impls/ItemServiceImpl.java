@@ -97,7 +97,7 @@ public class ItemServiceImpl implements ItemService {
             query.select(itemRoot).where(criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()])));
         }
 
-        List<Item> result = entityManager.createQuery(query).setFirstResult(page.getPageNumber()).setMaxResults(page.getPageSize()).getResultList();
+        List<Item> result = entityManager.createQuery(query).setMaxResults(page.getPageSize()).getResultList();
 
         CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
         Root<Item> booksRootCount = countQuery.from(Item.class);

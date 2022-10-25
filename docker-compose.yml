@@ -1,0 +1,27 @@
+services:
+  amaris-training:
+    container_name: training-server
+    build:
+      dockerfile: Dockerfile
+    image: amaris-training:latest
+    ports:
+      - 8080:8080
+    networks:
+      - spring-postgres
+
+  db:
+    container_name: training-database
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=training
+    ports:
+      - 5432:5432
+    networks:
+      - spring-postgres
+
+networks:
+  spring-postgres:
+    driver: bridge
