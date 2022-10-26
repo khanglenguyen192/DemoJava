@@ -3,7 +3,7 @@ services:
     container_name: training-server
     build:
       dockerfile: Dockerfile
-    image: amaris-training:latest
+    image: amaris-training:lastest
     ports:
       - 8080:8080
     networks:

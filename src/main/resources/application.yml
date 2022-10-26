@@ -16,7 +16,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/training  #url: jdbc:postgresql://db:5432/training # use to build docker image
+    url: jdbc:postgresql://host.docker.internal:5432/training
+#    url: jdbc:postgresql://localhost:5432/training
     username: root
     password: 123456
     driver-class-name: org.postgresql.Driver
