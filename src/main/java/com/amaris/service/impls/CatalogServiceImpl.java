@@ -4,17 +4,18 @@ import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.Catalog;
 import com.amaris.dto.catalog.CatalogDto;
 import com.amaris.exception.impl.NotAllowException;
-import com.amaris.dto.repository.CatalogRepository;
+import com.amaris.repository.CatalogRepository;
 import com.amaris.service.CatalogService;
 import com.amaris.service.mapper.CatalogMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 public class CatalogServiceImpl implements CatalogService {
     private final CatalogRepository catalogRepository;
     private final CatalogMapper catalogMapper;

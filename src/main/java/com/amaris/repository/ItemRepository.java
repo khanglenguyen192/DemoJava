@@ -1,7 +1,7 @@
-package com.amaris.dto.repository;
+package com.amaris.repository;
 
 import com.amaris.domain.Item;
-import com.amaris.dto.repository.base.BaseRepository;
+import com.amaris.repository.base.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

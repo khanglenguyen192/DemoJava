@@ -1,8 +1,8 @@
-package com.amaris.dto.repository;
+package com.amaris.repository;
 
 import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.UserRole;
-import com.amaris.dto.repository.base.BaseRepository;
+import com.amaris.repository.base.BaseRepository;
 import com.amaris.exception.impl.NotFoundException;
 
 import java.util.ArrayList;

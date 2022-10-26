@@ -6,13 +6,12 @@ import com.amaris.dto.account.UpdateAccountDto;
 import com.amaris.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/accounts")
 public class AccountController {
     private final AccountService accountService;
 
@@ -20,9 +19,8 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping("createAccount")
-    @Transactional
-    public ResponseEntity<String> CreateAccount(@RequestBody @Valid CreateAccountDto request) {
+    @PostMapping("register")
+    public ResponseEntity<String> createAccount(@RequestBody @Valid CreateAccountDto request) {
         if (accountService.createNewAccount(request))
             return new ResponseEntity<>(GlobalConstants.SUCCESS, HttpStatus.OK);
 
@@ -30,8 +28,7 @@ public class AccountController {
     }
 
     @PutMapping("updateAccount")
-    @Transactional
-    public ResponseEntity<String> UpdateAccount(@RequestBody UpdateAccountDto request)
+    public ResponseEntity<String> updateAccount(@RequestBody UpdateAccountDto request)
     {
         if (accountService.updateAccount(request))
             return new ResponseEntity<>(GlobalConstants.SUCCESS, HttpStatus.OK);

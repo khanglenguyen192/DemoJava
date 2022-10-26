@@ -2,12 +2,10 @@ package com.amaris.service.impls;
 
 import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.Account;
-import com.amaris.domain.AccountRoleMap;
 import com.amaris.exception.impl.NotFoundException;
-import com.amaris.dto.repository.AccountRepository;
-import com.amaris.dto.repository.AccountRoleMapRepository;
+import com.amaris.repository.AccountRepository;
+import com.amaris.repository.AccountRoleMapRepository;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,9 +39,9 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         } else {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-            for (AccountRoleMap accountRoleMap : accountRoleMapRepository.findAllByAccountId(account.getAccountId())) {
-                grantedAuthorities.add(new SimpleGrantedAuthority(accountRoleMap.getRole().getName()));
-            }
+//            for (AccountRoleMap accountRoleMap : accountRoleMapRepository.findAllByAccountId(account.getAccountId())) {
+//                grantedAuthorities.add(new SimpleGrantedAuthority(accountRoleMap.getRole().getName()));
+//            }
 
             return new User(account.getEmail(), account.getPassword(), grantedAuthorities);
         }

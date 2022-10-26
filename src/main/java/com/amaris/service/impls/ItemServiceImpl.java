@@ -7,20 +7,21 @@ import com.amaris.dto.base.PageResponse;
 import com.amaris.dto.item.ItemDto;
 import com.amaris.exception.impl.NotAllowException;
 import com.amaris.exception.impl.NotFoundException;
-import com.amaris.dto.repository.CatalogRepository;
-import com.amaris.dto.repository.ItemRepository;
+import com.amaris.repository.CatalogRepository;
+import com.amaris.repository.ItemRepository;
 import com.amaris.service.ItemService;
 import com.amaris.service.mapper.ItemMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
@@ -57,7 +58,7 @@ public class ItemServiceImpl implements ItemService {
         );
 
         Item newItem = itemMapper.toItem(itemDto);
-        newItem.setCatalog(catalog);
+        newItem.setCatalogId(catalog.getCatalogId());
         return itemRepository.insert(newItem) != null;
     }
 
@@ -69,12 +70,12 @@ public class ItemServiceImpl implements ItemService {
         itemMapper.toItem(item, itemDto);
 
         //Catalog change
-        if (!itemDto.getCatalogId().equals(item.getCatalog().getCatalogId()))
+        if (!itemDto.getCatalogId().equals(item.getCatalogId()))
         {
             Catalog catalog = catalogRepository.findById(itemDto.getCatalogId()).orElseThrow(
                     () -> new NotFoundException(GlobalConstants.CATALOG_ID_NOT_FOUND)
             );
-            item.setCatalog(catalog);
+            item.setCatalogId(catalog.getCatalogId());
         }
         return itemRepository.update(item) != null;
     }

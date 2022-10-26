@@ -10,12 +10,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
-    Item toItem(ItemDto itemDto);
+    public Item toItem(ItemDto itemDto);
 
-    Item toItem(@MappingTarget Item item, ItemDto itemDto);
+    public Item toItem(@MappingTarget Item item, ItemDto itemDto);
 
-    @Mapping(source = "catalog.catalogId", target = "catalogId")
-    ItemDto toItemDto(Item item);
+    public ItemDto toItemDto(Item item);
 
-    List<ItemDto> toItemDtos(List<Item> items);
+    public List<ItemDto> toItemDtos(List<Item> items);
 }

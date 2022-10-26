@@ -41,7 +41,7 @@ public class AuthController {
         try {
             log.info("/api/auth/login");
             if (accountService.verifyAccount(request.getEmail(), request.getPassword())) {
-//                Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));W
+//                Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 //                UserDetails account = (UserDetails) authentication.getPrincipal();
                 String accessToken = jwtTokenUtil.generateToken(request.getEmail());
 

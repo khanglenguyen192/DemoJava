@@ -26,11 +26,17 @@ public class AccountRoleMap {
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
-    private Account account;
+    @Column(name = "account_id")
+    private Integer accountId;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private UserRole role;
+    @Column(name = "role_id")
+    private Integer roleId;
+
+//    @ManyToOne
+//    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+//    private Account account;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "role_id", referencedColumnName = "id")
+//    private UserRole role;
 }

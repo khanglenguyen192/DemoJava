@@ -35,7 +35,7 @@ public class Catalog extends BaseEntity {
 
     private String description;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "catalog", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Item> items;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "catalog", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Item> items;
 }

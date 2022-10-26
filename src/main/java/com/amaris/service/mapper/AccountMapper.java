@@ -8,9 +8,9 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
-    Account toAccount(CreateAccountDto createAccountDto);
+    public Account toAccount(CreateAccountDto createAccountDto);
 
-    Account toAccount(UpdateAccountDto updateAccountDto);
+    public Account toAccount(UpdateAccountDto updateAccountDto);
 
-    Account toAccount(@MappingTarget Account account, UpdateAccountDto updateAccountDto);
+    public Account toAccount(@MappingTarget Account account, UpdateAccountDto updateAccountDto);
 }

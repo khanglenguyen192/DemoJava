@@ -9,9 +9,9 @@ import com.amaris.dto.account.CreateAccountDto;
 import com.amaris.dto.account.UpdateAccountDto;
 import com.amaris.exception.impl.NotAllowException;
 import com.amaris.exception.impl.NotFoundException;
-import com.amaris.dto.repository.AccountRepository;
-import com.amaris.dto.repository.AccountRoleMapRepository;
-import com.amaris.dto.repository.UserRoleRepository;
+import com.amaris.repository.AccountRepository;
+import com.amaris.repository.AccountRoleMapRepository;
+import com.amaris.repository.UserRoleRepository;
 import com.amaris.service.AccountService;
 import com.amaris.service.mapper.AccountMapper;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 public class AccountServiceImpl implements AccountService {
     private final SecurityConfig securityConfig;
     private final AccountRepository accountRepository;
@@ -53,12 +54,12 @@ public class AccountServiceImpl implements AccountService {
 
         List<UserRole> roles = userRoleRepository.findAllById(request.getRoleIds());
 
-        accountRepository.save(newAccount);
+        newAccount = accountRepository.save(newAccount);
 
         for (UserRole role: roles){
             AccountRoleMap accountRoleMap = new AccountRoleMap();
-            accountRoleMap.setAccount(newAccount);
-            accountRoleMap.setRole(role);
+            accountRoleMap.setAccountId(newAccount.getAccountId());
+            accountRoleMap.setRoleId(role.getId());
 
             accountRoleMapRepository.save(accountRoleMap);
         }

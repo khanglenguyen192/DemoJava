@@ -33,7 +33,10 @@ public class Item extends BaseEntity {
 
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "catalog_id", referencedColumnName = "catalog_id")
-    private Catalog catalog;
+    @Column(name = "catalog_id")
+    private Integer catalogId;
+
+//    @ManyToOne
+//    @JoinColumn(name = "catalog_id", referencedColumnName = "catalog_id")
+//    private Catalog catalog;
 }
