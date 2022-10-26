@@ -47,11 +47,11 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/swagger-ui/index.html", "/v2/api-docs/**", "/v3/api-docs/**",
                              "/v3/api-docs", "/swagger-ui/**", "/swagger-ui.html", "/api/auth/login",
-                             "/api/auth/**", "/api/account/createAccount")
+                             "/api/auth/**", "/api/accounts/register")
                 .permitAll()
-                .antMatchers("/api/catalog/**")
+                .antMatchers("/api/catalogs/**")
                 .hasAnyAuthority("ADMIN")
-                .antMatchers("/api/item/**")
+                .antMatchers("/api/items/**")
                 .hasAnyAuthority("ADMIN", "USER")
                 .anyRequest()
                 .authenticated()
