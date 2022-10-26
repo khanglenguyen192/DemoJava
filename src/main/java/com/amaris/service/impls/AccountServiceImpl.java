@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
         newAccount.setCreatedDate(LocalDateTime.now());
 
         Account account = accountRepository.findByEmail(request.getEmail());
-        if (account != null) throw new NotAllowException(GlobalConstants.EMIAL_EXISTS);
+        if (account != null) throw new NotAllowException(GlobalConstants.EMAIL_EXISTS);
 
         List<UserRole> roles = userRoleRepository.findAllById(request.getRoleIds());
 
