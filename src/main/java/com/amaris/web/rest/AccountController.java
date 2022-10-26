@@ -27,9 +27,8 @@ public class AccountController {
         return new ResponseEntity<>(GlobalConstants.FAILED, HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("updateAccount")
-    public ResponseEntity<String> updateAccount(@RequestBody UpdateAccountDto request)
-    {
+    @PutMapping("update")
+    public ResponseEntity<String> updateAccount(@RequestBody UpdateAccountDto request) {
         if (accountService.updateAccount(request))
             return new ResponseEntity<>(GlobalConstants.SUCCESS, HttpStatus.OK);
 

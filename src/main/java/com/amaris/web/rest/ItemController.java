@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/item")
+@RequestMapping("/api/items")
 public class ItemController {
     private final ItemServiceImpl itemService;
 
@@ -24,15 +24,13 @@ public class ItemController {
 
     @GetMapping("getAllItem")
     public ResponseEntity<PageResponse<ItemDto>> getAll(@RequestParam(required = false, defaultValue = "0") int pageNo,
-                                                        @RequestParam(required = false, defaultValue = "3") int pageSize)
-    {
+                                                        @RequestParam(required = false, defaultValue = "3") int pageSize) {
         PageRequest page = PageRequest.of(pageNo, pageSize);
         return new ResponseEntity<>(itemService.getAllItem(page), HttpStatus.OK);
     }
 
     @PostMapping("createItem")
-    public ResponseEntity<String> createItem(@RequestBody @Valid ItemDto request)
-    {
+    public ResponseEntity<String> createItem(@RequestBody @Valid ItemDto request) {
         if (itemService.createItem(request))
             return new ResponseEntity<>(GlobalConstants.SUCCESS, HttpStatus.OK);;
 
@@ -40,11 +38,23 @@ public class ItemController {
     }
 
     @PutMapping("updateItem")
-    public ResponseEntity<String> updateItem(@RequestBody @Valid ItemDto request)
-    {
+    public ResponseEntity<String> updateItem(@RequestBody @Valid ItemDto request) {
         if (itemService.updateItem(request))
             return new ResponseEntity<>(GlobalConstants.SUCCESS, HttpStatus.OK);;
 
         return new ResponseEntity<>(GlobalConstants.FAILED, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping
+    public ResponseEntity<PageResponse<ItemDto>> findItems(@RequestParam(required = false) Integer itemId,
+                                                           @RequestParam(required = false) String itemName,
+                                                           @RequestParam(required = false) Integer catalogId,
+                                                           @RequestParam(required = false) String catalogName,
+                                                           @RequestParam(required = false) String createBy,
+                                                           @RequestParam(required = false, defaultValue = "0") int pageNo,
+                                                           @RequestParam(required = false, defaultValue = "100") int pageSize) {
+
+        PageRequest page = PageRequest.of(pageNo, pageSize);
+        return new ResponseEntity<>(itemService.findItem(itemId, itemName, catalogId, catalogName, createBy, page), HttpStatus.OK);
     }
 }

@@ -16,4 +16,6 @@ public interface ItemService {
     boolean createItem(ItemDto itemDto);
 
     boolean updateItem(ItemDto itemDto);
+
+    PageResponse<ItemDto> findItem(Integer itemId, String itemName, Integer catalogId, String catalogName, String createBy, Pageable page);
 }
