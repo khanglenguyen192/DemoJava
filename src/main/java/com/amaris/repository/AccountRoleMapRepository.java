@@ -15,6 +15,6 @@ public interface AccountRoleMapRepository extends JpaRepository<AccountRoleMap, 
 
     @Query(value = "SELECT userRole FROM AccountRoleMap AS accountRoleMap " +
                    "INNER JOIN UserRole AS userRole ON accountRoleMap.roleId = userRole.id " +
-                   "WHERE accountRoleMap.accountId = :accountId", nativeQuery = false)
+                   "WHERE accountRoleMap.accountId = :accountId")
     List<UserRole> findAllRoleByAccountId(int accountId);
 }

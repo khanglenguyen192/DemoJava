@@ -3,6 +3,8 @@ package com.amaris.service.impls;
 import com.amaris.common.utils.GlobalConstants;
 import com.amaris.domain.Catalog;
 import com.amaris.domain.Item;
+import com.amaris.domain.QCatalog;
+import com.amaris.domain.QItem;
 import com.amaris.dto.base.PageResponse;
 import com.amaris.dto.item.ItemDto;
 import com.amaris.exception.impl.NotAllowException;
@@ -11,6 +13,8 @@ import com.amaris.repository.CatalogRepository;
 import com.amaris.repository.ItemRepository;
 import com.amaris.service.ItemService;
 import com.amaris.service.mapper.ItemMapper;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -92,38 +96,35 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public PageResponse<ItemDto> findItem(Integer itemId, String itemName, Integer catalogId, String catalogName, String createBy, Pageable page) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Item> query = criteriaBuilder.createQuery(Item.class);
-        Root<Item> itemRoot = query.from(Item.class);
+        var qItem = QItem.item;
+        var qCatalog = QCatalog.catalog;
+        var query = new JPAQuery<Item>(entityManager);
 
-        List<Predicate> predicates = new ArrayList<>();
+        query.from(qItem).innerJoin(qCatalog).on(qItem.catalogId.eq(qCatalog.catalogId));
+
         if (itemId != null)
-            predicates.add(criteriaBuilder.equal(itemRoot.get("itemId"), itemId));
+            query.where(qItem.itemId.eq(itemId));
 
         if (itemName != null)
-            predicates.add(criteriaBuilder.equal(itemRoot.get("itemName"), itemName));
+            query.where(qItem.itemName.eq(itemName));
 
         if (catalogId != null)
-            predicates.add(criteriaBuilder.equal(itemRoot.get("catalogId"), catalogId));
+            query.where(qItem.catalogId.eq(catalogId));
+
+        if (catalogName != null)
+            query.where(qCatalog.catalogName.eq(catalogName));
 
         if (createBy != null)
-            predicates.add(criteriaBuilder.equal(itemRoot.get("createBy"), createBy));
+            query.where(qItem.createdBy.eq(createBy));
 
-        if (!predicates.isEmpty()) {
-            query.select(itemRoot).where(criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()])));
-        }
+        Long count = query.stream().count();
 
-        List<Item> result = entityManager.createQuery(query).setFirstResult(page.getPageNumber()).setMaxResults(page.getPageSize()).getResultList();
+        query.offset(page.getOffset()).limit(page.getPageSize());
 
-        CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
-        Root<Item> booksRootCount = countQuery.from(Item.class);
-        countQuery.select(criteriaBuilder.count(booksRootCount)).where(criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()])));
+        List<ItemDto> result = query.select(Projections.fields(ItemDto.class, qItem.itemId, qItem.itemName, qItem.description, qItem.catalogId)).fetch();
 
-        // Fetches the count of all Books as per given criteria
-        int count = Math.toIntExact(entityManager.createQuery(countQuery).setFirstResult(page.getPageNumber()).setMaxResults(page.getPageSize()).getSingleResult());
+        long totalPage = count / page.getPageSize() + (count % page.getPageSize() == 0 ? 0: 1);
 
-        int totalPage = count / page.getPageSize() + (count % page.getPageSize() == 0 ? 0: 1);
-
-        return new PageResponse<>(itemMapper.toItemDtos(result), page, totalPage);
+        return new PageResponse<>(result, page, totalPage);
     }
 }

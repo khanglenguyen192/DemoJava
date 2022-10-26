@@ -9,10 +9,10 @@ import java.util.List;
 public class PageResponse<T> {
     private int pageNo;
     private int pageSize;
-    private int pageTotal;
+    private long pageTotal;
     private List<T> repsonseData;
 
-    public PageResponse(List<T> data, Pageable page, int pageTotal)
+    public PageResponse(List<T> data, Pageable page, long pageTotal)
     {
         this.repsonseData = data;
         this.pageNo = page.getPageNumber();
