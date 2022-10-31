@@ -127,4 +127,19 @@ public class ItemServiceImpl implements ItemService {
 
         return new PageResponse<>(result, page, totalPage);
     }
+
+    @Override
+    public ItemDto getItem(int id) {
+        var qItem = QItem.item;
+        var qCatalog = QCatalog.catalog;
+        var query = new JPAQuery<Item>(entityManager);
+
+        query.from(qItem).innerJoin(qCatalog).on(qItem.catalogId.eq(qCatalog.catalogId));
+
+        query.where(qItem.itemId.eq(id));
+
+        ItemDto result = query.select(Projections.fields(ItemDto.class, qItem.itemId, qItem.itemName, qItem.description, qItem.catalogId)).fetchFirst();
+
+        return result;
+    }
 }

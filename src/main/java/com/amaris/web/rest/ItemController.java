@@ -57,4 +57,9 @@ public class ItemController {
         PageRequest page = PageRequest.of(pageNo, pageSize);
         return new ResponseEntity<>(itemService.findItem(itemId, itemName, catalogId, catalogName, createBy, page), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ItemDto> getItem(@RequestParam(required = false, defaultValue = "1") int id) {
+        return new ResponseEntity<>(itemService.getItem(id), HttpStatus.OK);
+    }
 }
