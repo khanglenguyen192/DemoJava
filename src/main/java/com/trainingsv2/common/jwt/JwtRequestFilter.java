@@ -1,0 +1,89 @@
+package com.trainingsv2.common.jwt;
+
+import com.trainingsv2.common.utils.GlobalConstants;
+import com.trainingsv2.domain.Account;
+import com.trainingsv2.domain.UserRole;
+import com.trainingsv2.common.exception.impl.NotFoundException;
+import com.trainingsv2.repository.AccountRepository;
+import com.trainingsv2.repository.AccountRoleMapRepository;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
+@Component
+public class JwtRequestFilter extends OncePerRequestFilter {
+    private final JwtTokenUtils jwtTokenUtil;
+    private final AccountRepository accountRepository;
+    private final AccountRoleMapRepository accountRoleMapRepository;
+
+    public JwtRequestFilter(JwtTokenUtils jwtTokenUtil, AccountRepository accountRepository, AccountRoleMapRepository accountRoleMapRepository) {
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.accountRepository = accountRepository;
+        this.accountRoleMapRepository = accountRoleMapRepository;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (hasAuthorizationHeader(request)) {
+            String accessToken = getAccessToken(request);
+            if (jwtTokenUtil.validateAccessToken(accessToken)) {
+                setAuthenticationContext(accessToken, request);
+            }
+        }
+        filterChain.doFilter(request, response);
+    }
+
+    private void setAuthenticationContext(String accessToken, HttpServletRequest request) {
+        UserDetails userDetails = getUserDetailsFromAccessToken(accessToken);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+    }
+
+    private UserDetails getUserDetailsFromAccessToken(String accessToken) {
+        String email = jwtTokenUtil.getEmailFromToken(accessToken);
+        Account account = accountRepository.findByEmail(email);
+
+        if (account == null) {
+            throw new NotFoundException(GlobalConstants.INVALID_USER);
+        } else {
+            Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+
+            for (UserRole role : accountRoleMapRepository.findAllRoleByAccountId(account.getAccountId())) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+            }
+
+            return new User(account.getEmail(), account.getPassword(), grantedAuthorities);
+        }
+    }
+
+    private boolean hasAuthorizationHeader(HttpServletRequest request) {
+        String header = request.getHeader(GlobalConstants.AUTHORIZATION);
+        return !ObjectUtils.isEmpty(header) && header.startsWith(GlobalConstants.BEARER);
+    }
+
+    private String getAccessToken(HttpServletRequest request) {
+        String header = request.getHeader(GlobalConstants.AUTHORIZATION);
+
+        if (header.startsWith(GlobalConstants.BEARER)) {
+            String token = header.split(" ")[1].trim();
+            return token;
+        }
+        return null;
+    }
+}
