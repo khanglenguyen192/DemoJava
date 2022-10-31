@@ -1,19 +1,17 @@
 package com.trainingsv2.web.rest;
 
-import com.trainingsv2.common.jwt.JwtTokenUtils;
+import com.trainingsv2.common.utils.ApiConstants;
 import com.trainingsv2.common.utils.GlobalConstants;
 import com.trainingsv2.dto.account.LoginDto;
-import com.trainingsv2.service.impls.AccountServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.Around;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
+import net.minidev.json.JSONObject;
+import org.springframework.http.*;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 
@@ -21,30 +19,27 @@ import javax.validation.Valid;
 @RequestMapping("/api/auth")
 @Slf4j
 public class AuthController {
-    private final AccountServiceImpl accountService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenUtils jwtTokenUtil;
+    private final RestTemplate restTemplate;
 
-    public AuthController(AccountServiceImpl accountService, AuthenticationManager authenticationManager, JwtTokenUtils jwtTokenUtil) {
-        this.accountService = accountService;
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenUtil = jwtTokenUtil;
+    public AuthController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
+
     @PostMapping("login")
-    @Around("execution(* com.amaris.web.rest..*.*(..))")
     public ResponseEntity<String> login(@RequestBody @Valid LoginDto request) {
         try {
-            log.info("/api/auth/login");
-            if (accountService.verifyAccount(request.getEmail(), request.getPassword())) {
-//                Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-//                UserDetails account = (UserDetails) authentication.getPrincipal();
-                String accessToken = jwtTokenUtil.generateToken(request.getEmail());
+            var headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-                return ResponseEntity.ok(accessToken);
-            }
+            var loginBody = new JSONObject();
+            loginBody.put("email", request.getEmail());
+            loginBody.put("password", request.getPassword());
 
-            return new ResponseEntity<>(GlobalConstants.LOGIN_FAILED, HttpStatus.UNAUTHORIZED);
+            HttpEntity<String> httpRequest = new HttpEntity<>(loginBody.toString(), headers);
+            String value = restTemplate.postForObject(ApiConstants.LOGIN, httpRequest, String.class);
+            return ResponseEntity.ok(value);
+
         } catch (BadCredentialsException ex) {
             log.error(GlobalConstants.INVALID_USER);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
