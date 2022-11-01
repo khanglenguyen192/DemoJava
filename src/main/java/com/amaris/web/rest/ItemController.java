@@ -45,7 +45,7 @@ public class ItemController {
         return new ResponseEntity<>(GlobalConstants.FAILED, HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping
+    @GetMapping("findItems")
     public ResponseEntity<PageResponse<ItemDto>> findItems(@RequestParam(required = false) Integer itemId,
                                                            @RequestParam(required = false) String itemName,
                                                            @RequestParam(required = false) Integer catalogId,
@@ -58,7 +58,7 @@ public class ItemController {
         return new ResponseEntity<>(itemService.findItem(itemId, itemName, catalogId, catalogName, createBy, page), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping
     public ResponseEntity<ItemDto> getItem(@RequestParam(required = false, defaultValue = "1") int id) {
         return new ResponseEntity<>(itemService.getItem(id), HttpStatus.OK);
     }

@@ -209,6 +209,7 @@
                     <dependency>
                         <groupId>com.querydsl</groupId>
                         <artifactId>querydsl-apt</artifactId>
+                        <version>5.0.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
