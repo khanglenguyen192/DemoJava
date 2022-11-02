@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-    public static final String JWT_TOKEN = "";
+    public static String JWT_TOKEN = "";
     private final SessionCreationPolicy SESSION_CREATION_POLICY = SessionCreationPolicy.STATELESS;
 
     @Bean

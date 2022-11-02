@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,5 +20,10 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 public class Cart extends BaseEntity {
     @MongoId
     private Integer accountId;
-    private ItemSale itemSales[];
+
+    private List<ItemSale> itemSales = new ArrayList<>();
+
+    public void addItemSale(ItemSale itemSale) {
+        itemSales.add(itemSale);
+    }
 }

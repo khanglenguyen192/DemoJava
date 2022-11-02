@@ -2,6 +2,7 @@ package com.trainingsv2.web.rest;
 
 import com.trainingsv2.common.utils.ApiConstants;
 import com.trainingsv2.common.utils.GlobalConstants;
+import com.trainingsv2.config.SecurityConfig;
 import com.trainingsv2.dto.account.LoginDto;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
@@ -38,6 +39,8 @@ public class AuthController {
 
             HttpEntity<String> httpRequest = new HttpEntity<>(loginBody.toString(), headers);
             String value = restTemplate.postForObject(ApiConstants.LOGIN, httpRequest, String.class);
+
+            SecurityConfig.JWT_TOKEN = value;
             return ResponseEntity.ok(value);
 
         } catch (BadCredentialsException ex) {

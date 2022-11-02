@@ -15,4 +15,5 @@ public class GlobalConstants {
     public static final String CATALOG_ID_NOT_FOUND = "CatalogID not found";
     public static final String ITEM_ID_NOT_FOUND = "ItemID not found";
     public static final String LOGIN_FAILED = "Login failed";
+    public static final String KAFKA_BASE_TOPIC = "amaris-training-1";
 }
